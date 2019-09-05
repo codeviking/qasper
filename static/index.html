@@ -13,6 +13,28 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="main.js"></script>
+        <style>
+            .card-header[data-toggle="collapse"] {
+                display: grid;
+                grid-template-columns: auto min-content;
+                align-items: center;
+            }
+            .card-header[data-toggle="collapse"]::after {
+                content: '-';
+                font-size: 2rem;
+            }
+            .card-header[data-toggle="collapse"].collapsed::after {
+                content: '+'
+            }
+
+            .card-header[data-toggle="collapse"]:hover {
+                text-decoration: none;
+            }
+
+            .card-header[data-toggle="collapse"]:hover h3 {
+                text-decoration: underline;
+            }
+        </style>
     </head>
     <body>
         <form method='post' action="submit">
@@ -24,7 +46,9 @@
 			<h2 class="text-center">Questions about research papers</h2>
                         <div class="card">
                             <a class="card-header" data-toggle="collapse" href="#collapseInstructions" aria-expanded="true" aria-controls="collapseInstructions">
-                                <h3> Instructions (click to toggle visibility) </h3>
+                                <h3>
+                                     Instructions (click to toggle visibility)
+                                </h3>
                             </a>
                             <div id="collapseInstructions" class="collapse show">
                                 <div class="card-body">
@@ -54,7 +78,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <a class="card-header" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                            <a class="card-header collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
                                 <h3> Example questions (click to toggle visibility) </h3>
                             </a>
                             <div id="collapseExample" class="collapse hide">
@@ -64,7 +88,7 @@
 				        <b>Abstract:</b> Multi-hop inference is necessary for machine learning systems to successfully solve tasks such as Recognising Textual Entailment and Machine Reading.
 					In this work, we demonstrate the effectiveness of adaptive computation for learning the number of inference steps required for examples of different complexity and
 					that learning the correct number of inference steps is difficult. We introduce the first model involving Adaptive Computation Time which provides a small performance
-					benefit on top of a similar model without an adaptive component as well as enabling considerable insight into the reasoning process of the model. 
+					benefit on top of a similar model without an adaptive component as well as enabling considerable insight into the reasoning process of the model.
 				    </p>
 				    <p>
 				    	Here are some questions one might ask about the paper based on this abstract:
@@ -156,7 +180,7 @@
                                 <div class="col">
                                     <div class="card sticky-top">
                                         <div class="card-body">
-                                            <div class="row">	
+                                            <div class="row">
                                                 <div class="col">
                                                     <h3>Have you read this paper before?</h3>
                                                     <select id=user_paper_read onchange="select_change();">
@@ -220,7 +244,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">	
+                                            <div class="row">
                                                 <div class="col">
                                                     <h2>Here's what other papers say about this paper</h2>
 							<div class="card-body">
