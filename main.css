@@ -1,0 +1,73 @@
+#error_panel {
+    color: red;
+    font-weight: bold
+}
+
+.rectangles {
+    min-height: 50px;
+    font-size: 12px;
+    background-color: #cab;
+    text-align: center;
+}
+
+.rectangles:hover {
+    border: solid darkred;
+}
+
+.notes-wrapper {
+    max-width: 1600px;
+    overflow: hidden;
+    display: flex;
+}
+
+.note {
+    width: 250px;
+    min-height: 30px;
+    background-color: #ffa94d;
+    margin: 5px;
+    font-size: 16px;
+    display: inline-flex;
+    text-align: center
+}
+
+.qapairs {
+    top: 10px;
+    padding: 10px 0px 0px 20px;
+}
+
+.qapairs>div {
+    min-width: 700px;
+    margin: 10px 10px;
+    padding: 0px;
+    background: #cab;
+    font-size: 12px;
+    outline: 1px solid grey;
+
+}
+
+.annotated {
+    float: left
+}
+
+select {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.card-body {
+    padding: 1.0rem;
+}
+
+#questionsWritten .card-text {
+    white-space: pre-wrap
+}
+
+#passage {
+    white-space: pre-wrap
+}
+
+.btn.btn-primary[disabled] {
+    background-color: #6c757d;
+}

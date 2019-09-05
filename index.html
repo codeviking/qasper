@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <title>👻 Qasper</title>
+        <link href="main.css" rel="stylesheet" />
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <form method='post' action="submit">
+            <input type='hidden' value='' name='assignmentId' id='assignmentId' />
+            <div id="root" class="container">
+                <div class="row mb-4">
+                    <div class="col">
+                        <h1 class="text-center">Project Qasper 👻</h1>
+			<h2 class="text-center">Questions about research papers</h2>
+                        <div class="card">
+                            <a class="card-header" data-toggle="collapse" href="#collapseInstructions" aria-expanded="true" aria-controls="collapseInstructions">
+                                <h3> Instructions (click to toggle visibility) </h3>
+                            </a>
+                            <div id="collapseInstructions" class="collapse show">
+                                <div class="card-body">
+                                    <p class="card-text">
+					We are trying to improve NLP paper reading experience for readers of all backgrounds. Towards this goal, we would like to know what kinds of questions
+					a reader might have about a paper after they have read its title and abstract, and we seek your help in obtaining these questions. Thank you for helping us!
+					Below you will see titles and abstracts of papers recently posted in CS.CL section of ArXiV. We ask you to read each title and abtract completely, and type in
+					questions you think would be answered by the paper. In addition, we also ask you to select options from three drop-down menus below to help us understand your
+					background, and how much you know about the paper. Please keep the following in mind:
+					<ul>
+						<li>
+							Please write specific questions. Most questions that you expect to be answered with a "yes" or "no", or with a phrase or a sentence
+							(or two) from the paper are good questions. Click on "Example questions" below to look at some examples.
+						</li>
+						<li>
+							Click "Add Question" after you are done typing a question about the paper. You can "Edit" or "Delete" previously added questions any time.
+						</li>
+						<li>
+							You have 10 paper abstracts to choose from, and you can skip papers if you cannot think of questions for some of them.
+						</li>
+						<li>
+							Please leave any feeedback you have for us in the box at the bottom of this page.
+						</li>
+					</ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <a class="card-header" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                                <h3> Example questions (click to toggle visibility) </h3>
+                            </a>
+                            <div id="collapseExample" class="collapse hide">
+                                <div class="card-body">
+				  <p><b>Title:</b> Learning to Reason With Adaptive Computation</p>
+                                    <p class="card-text">
+				        <b>Abstract:</b> Multi-hop inference is necessary for machine learning systems to successfully solve tasks such as Recognising Textual Entailment and Machine Reading.
+					In this work, we demonstrate the effectiveness of adaptive computation for learning the number of inference steps required for examples of different complexity and
+					that learning the correct number of inference steps is difficult. We introduce the first model involving Adaptive Computation Time which provides a small performance
+					benefit on top of a similar model without an adaptive component as well as enabling considerable insight into the reasoning process of the model. 
+				    </p>
+				    <p>
+				    	Here are some questions one might ask about the paper based on this abstract:
+					<ol>
+						<li>
+							What is their baseline model?
+						</li>
+						<li>
+							Do they use reinforcement learning?
+						</li>
+						<li>
+							What textual entailment datasets do they evaluate ACT on?
+						</li>
+						<li>
+							How do they define the notion of correct number of inference steps?
+						</li>
+						<li>
+							Do they evaluate only on English datasets? #BenderRule
+						</li>
+					</ol>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <a class="card-header">
+                        <h3>How long have you been doing NLP/ML?</h3>
+                    </a>
+                    <div class="card-body">
+                            <select name="user_nlp_background">
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="zero">I am not really an NLP/ML person</option>
+                                <option value="two">less than 2 years</option>
+                                <option value="five">2 - 5 years</option>
+                                <option value="infinity">more than 5 years</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>
+                            Total Questions Written in HIT: <span id="numQuestionsWritten"></span>
+                        </h3>
+                    </div>
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <button id="prev_passage" type="button" class="btn btn-primary" onclick="previousPassage();">
+                            Previous Paper
+                        </button>
+                        <button id="next_passage" type="button" class="btn btn-primary" onclick="nextPassage();">
+                            Next Paper
+                        </button>
+                    </div>
+                </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h2>
+                                                Paper <span id="passageNum"></span>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <div id="title">
+                                                    <strong>Loading paper...</strong>
+                                                    <div class="spinner-border" role="status">
+                                                        <span class="sr-only"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <div id="abstract">
+                                                    <strong>Loading paper...</strong>
+                                                    <div class="spinner-border" role="status">
+                                                        <span class="sr-only"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card sticky-top">
+                                        <div class="card-body">
+                                            <div class="row">	
+                                                <div class="col">
+                                                    <h3>Have you read this paper before?</h3>
+                                                    <select id=user_paper_read onchange="select_change();">
+                                                        <option disabled selected value=na> -- select an option -- </option>
+                                                        <option value="no">No</option>
+                                                        <option value="somewhat">Skimmed it</option>
+                                                        <option value="yes">Closely read it</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h3>How familiar are you with its topic?</h3>
+                                                    <select id=user_paper_topic_background onchange="select_change();">
+                                                        <option disabled selected value=na> -- select an option -- </option>
+                                                        <option value="no">Unfamiliar</option>
+                                                        <option value="somewhat">Familiar</option>
+                                                        <option value="yes">This is my research area</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card sticky-top">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h3>Write a question about the paper</h3>
+                                                    <input type="text" class="form-control" id="input-question" name="input-question" placeholder="Write a question here!" onkeyup="checkIfQuestionCanBeSubmitted();">
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col">
+						<!--
+                                                    <h4>Your Answer</h4>
+						    Select a span in the paper and it will appear in the box below.<br/>
+                                                    <div id="answersWritten">
+                                                    </div>
+                                                    <button type="button" id="add_span" class="btn btn-primary mt-2" onclick="return addSpan();" disabled style="display:none">
+                                                        Add Another Span
+                                                    </button>
+						-->
+                                                    <div id="error_panel">
+                                                    </div>
+                                                    <button type="button" id="next_question" class="btn btn-primary mt-4" onclick="create_question();">
+                                                        Add Question
+                                                    </button>
+                                                </div>
+						<!--
+                                                <div class="col">
+                                                    <h4>AI Prediction</h4>
+						    AI prediction will appear below as soon as you are done typing a question.<br />
+                                                    <div class="card bg-light">
+                                                        <div class="card-body">
+							    <p>
+                                                             <samp id="ai-answer"></samp>
+							    </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">	
+                                                <div class="col">
+                                                    <h2>Here's what other papers say about this paper</h2>
+							<div class="card-body">
+							    <div class="card-text">
+								<div id="citationContext">
+								    <strong>Loading citation context...</strong>
+								    <div class="spinner-border" role="status">
+									<span class="sr-only"></span>
+								    </div>
+								</div>
+							    </div>
+							</div>
+                                                </div>
+                                            </div>
+						-->
+                                            <div class="row">
+                                                <div class="col" id="questionsWritten">
+                                                    <h3> Questions written for this paper:</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h3>
+                                    Please leave your feedback here
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="comment">
+                                    <textarea class="form-control" rows="3" type="text" id="feedback" placeholder="Please leave your feedback here."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <button id="ready_submit" type="button" class="btn btn-secondary" onclick="final_submit();" disabled>
+                            Ready to Submit HIT
+                        </button>
+                    </div>
+                </div>
+                <div class="row mb-4 text-center" id="submission_container" style="display:none">
+                    <div class="col">
+                        <input type='submit' class="btn btn-success" id='submitButton' name="submitButton" disabled value='Submit HIT'>
+                        <h2>Thank you for helping with our research!</h2>
+                    </div>
+                </div>
+                <input id="generated_answers" name="generated_answers" type="hidden">
+            </div>
+        </form>
+    </body>
+</html>
